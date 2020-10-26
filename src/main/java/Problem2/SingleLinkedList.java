@@ -125,19 +125,13 @@ public class SingleLinkedList {
     public void add(int val) {
         size++;
 
-        //if head is null
-        if(head == null){
 
-            head = new ListNode(val);
-            return;
-        }
-        else{
         ListNode ptr = head;
         while (ptr.next != null) {
             ptr = ptr.next;
         }
         ptr.next = new ListNode(val);
-        }
+
     }
 
     @Override
