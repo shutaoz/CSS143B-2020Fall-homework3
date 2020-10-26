@@ -51,6 +51,7 @@ public class Problem3Test {
     // and you thought we never use main() in this class ;)
     // this main function call printListInReverse to print on the screen
     // use this main function for debugging, okay to change
+
     public static void main(String[] args) {
         int[][] inputs = {
                 {},

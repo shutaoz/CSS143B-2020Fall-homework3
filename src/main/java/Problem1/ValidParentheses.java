@@ -6,6 +6,27 @@ public class ValidParentheses {
     public static boolean isValid(String str) {
         // homework
         // !!! must use ArrayStack or LinkedListStack from problem 1
-        return false; // place holder
+        LinkedListStack<Character> pStack = new LinkedListStack<>();
+        if(str != null) {
+            for (int i = 0; i < str.length(); i++) {
+                char paren = str.charAt(i);
+                if (paren == '(' || paren == '{' || paren == '[')
+                    pStack.push(paren);
+                else {
+                    if (pStack.size() == 0) return false;
+                    char pair = pStack.pop();
+                    boolean match = false;
+                    if (pair == '(')
+                        match = (paren == ')');
+                    else if (pair == '{')
+                        match = (paren == '}');
+                    else if (pair == '[')
+                        match = (paren == ']');
+
+                    if (!match) return false;
+                }
+            }
+        }
+        return pStack.size() == 0;
     }
 }

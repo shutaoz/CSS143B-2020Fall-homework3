@@ -1,5 +1,11 @@
 package Problem2;
 
+import Problem1.LinkedListStack;
+
+
+import java.util.List;
+import java.util.Scanner;
+
 // all functions assume using dummy node
 public class SingleLinkedList {
     // do not add member variables
@@ -13,18 +19,91 @@ public class SingleLinkedList {
     // copy constructor
     public SingleLinkedList(SingleLinkedList list) {
         // homework
+        size = 0;
+        if (list == null) {
+            head = new ListNode();
+            return;
+
+        }
+
+
+            head = new ListNode();
+            ListNode temp0 = list.head.next; //
+            ListNode temp = head;
+
+
+            while(temp0 != null){
+                temp.next = new ListNode(temp0.val);
+                temp = temp.next;
+                temp0 = temp0.next;
+                ++size; //
+
+            }
+
+
     }
 
-    public int removeAll(int valueToRemove) {
+    public int removeAll(int valueToRemove){
         // homework
-        // in-place
-        return -1; // place holder
+
+
+        ListNode temp = head;
+        ListNode prev = null;
+        int counter = 0;
+
+
+        //case 1 when head has the value that needs to be removed
+        while (temp != null && temp.val == valueToRemove)
+        {
+            head = temp.next; // Changed head
+            temp = head; // Change Temp
+        }
+
+        //case 2 the head doesn't store the wanted value
+        while (temp != null)
+        {
+            while (temp != null && temp.val != valueToRemove)
+            {
+                prev = temp;
+                temp = temp.next;
+            }
+
+
+            if (temp == null)
+                return counter;
+
+
+            prev.next = temp.next;
+            ++counter;
+            --size;
+
+            temp = prev.next;
+        }
+
+    return counter;
+
     }
 
     // reverse the linked list nodes iteratively (no recursion)
     public void reverse() {
         // homework
         // in-place
+        if(head == null)    return;
+
+        ListNode prev = null;
+        ListNode current = head.next; //the actual linked link
+        ListNode next = null;
+
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+
+    head.next = prev;
+
+
     }
 
     // do not change any function below
@@ -45,15 +124,19 @@ public class SingleLinkedList {
     // Appends the specified element to the end of this list
     public void add(int val) {
         size++;
+
+
         ListNode ptr = head;
         while (ptr.next != null) {
             ptr = ptr.next;
         }
         ptr.next = new ListNode(val);
+
     }
 
     @Override
     public String toString() {
+
         StringBuilder builder = new StringBuilder();
         ListNode ptr = head.next;
         while (ptr != null) {
@@ -74,6 +157,7 @@ public class SingleLinkedList {
         }
 
         SingleLinkedList otherList = (SingleLinkedList) obj;
+        if(otherList.head == null)   return false;
 
         if (this.size != otherList.size) {
             return false;
